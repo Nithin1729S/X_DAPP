@@ -9,7 +9,7 @@ const Tweets = ({ tweets, shortAddress }) => {
             alt="User Icon"
           />
           <div className="tweet-inner">
-            <div className="author">{shortAddress(tweet.author)}</div>
+            <div className="author">{tweet.displayName}</div>
             <div className="content">{tweet.content}</div>
           </div>
         </div>
