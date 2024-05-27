@@ -3,3 +3,29 @@
     /* position:absolute; */
     margin-left: 400px;
 }
+
+.like-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .like-button {
+    display: flex;
+    align-items: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .like-button .fa-heart {
+    margin-right: 5px;
+  }
+  
+  .liked .fa-heart {
+    color: red; /* Change to red when liked */
+  }
+  
+  .likes-count {
+    font-size: 1rem;
+  }
+  

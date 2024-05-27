@@ -85,6 +85,35 @@ export default function App() {
     }
   }
 
+  async function likeTweet(author, id) {
+    if (!contract || !account) {
+      console.error("Web3 or contract not initialized or account not connected.");
+      return;
+    }
+  
+    try {
+      await contract.methods.likeTweet(author, id).send({ from: account });
+      getTweets();
+    } catch (error) {
+      console.error("Failed to like tweet:", error);
+    }
+  }
+
+  async function unlikeTweet(author, id) {
+    if (!contract || !account) {
+      console.error("Web3 or contract not initialized or account not connected.");
+      return;
+    }
+  
+    try {
+      await contract.methods.unlikeTweet(author, id).send({ from: account });
+      getTweets();
+    } catch (error) {
+      console.error("Failed to unlike tweet:", error);
+    }
+  }
+  
+
   function shortAddress(address, startLength = 6, endLength = 4) {
     if (address === account && profileExists) {
       return profileExists;
@@ -118,6 +147,8 @@ export default function App() {
             account={account}
             deleteTweet={deleteTweet}
             editTweet={editTweet}
+            likeTweet={likeTweet}
+            unlikeTweet={unlikeTweet}
           />
         </>
       ) : (
