@@ -38,9 +38,10 @@ const AddTweet = ({ contract, account, getTweets }) => {
         onChange={(e) => setNewTweet(e.target.value)}
       />
       <br />
-      <button id="tweetSubmitBtn" disabled={loading} type="submit">
-        {loading ? <div className="spinner"></div> : <>Tweet</>}
-      </button>
+      <button id="tweetSubmitBtn" style={{ marginLeft:'260px'}} disabled={loading} type="submit">
+  {loading ? <div className="spinner"></div> : <>Tweet</>}
+</button>
+
     </form>
   );
 };

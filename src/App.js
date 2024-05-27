@@ -5,6 +5,7 @@ import Tweets from "./components/Tweets";
 import AddTweet from "./components/AddTweet";
 import Connect from "./components/Connect";
 import ProfileCreation from "./components/ProfileCreation";
+import logo from "./images/logo.png"
 
 export default function App() {
   const [account, setAccount] = useState(null);
@@ -22,16 +23,14 @@ export default function App() {
     }
 
     const tempTweets = await contract.methods.getAllTweets().call();
-    // we do this so we can sort the tweets by timestamp
     const tweets = [...tempTweets];
-    tweets.sort((a, b) => b.timestamp - a.timestamp);
+    tweets.sort((a, b) => Number(b.timestamp) - Number(a.timestamp));
     setTweets(tweets);
     setLoading(false);
   }
 
   async function checkProfile() {
     const userProfile = await getProfile(account);
-
     setProfileExists(userProfile);
   }
 
@@ -58,6 +57,34 @@ export default function App() {
     }
   }, [contract, account, profileExists]);
 
+  async function deleteTweet(id) {
+    if (!contract || !account) {
+      console.error("Web3 or contract not initialized or account not connected.");
+      return;
+    }
+
+    try {
+      await contract.methods.deleteTweet(id).send({ from: account });
+      getTweets();
+    } catch (error) {
+      console.error("Failed to delete tweet:", error);
+    }
+  }
+
+  async function editTweet(id, newContent) {
+    if (!contract || !account) {
+      console.error("Web3 or contract not initialized or account not connected.");
+      return;
+    }
+
+    try {
+      await contract.methods.editTweet(id, newContent).send({ from: account });
+      getTweets();
+    } catch (error) {
+      console.error("Failed to edit tweet:", error);
+    }
+  }
+
   function shortAddress(address, startLength = 6, endLength = 4) {
     if (address === account && profileExists) {
       return profileExists;
@@ -68,7 +95,9 @@ export default function App() {
 
   return (
     <div className="container">
-      <h1>X DAPP</h1>
+      <img id="logo" src={logo} alt="Logo" />
+      {/* <h1>X DAPP</h1> */}
+
       <Connect
         web3={web3}
         setWeb3={setWeb3}
@@ -85,7 +114,13 @@ export default function App() {
             account={account}
             getTweets={getTweets}
           />
-          <Tweets tweets={tweets} shortAddress={shortAddress} />
+          <Tweets
+            tweets={tweets}
+            shortAddress={shortAddress}
+            account={account}
+            deleteTweet={deleteTweet}
+            editTweet={editTweet}
+          />
         </>
       ) : (
         account &&
