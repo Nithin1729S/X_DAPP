@@ -99,7 +99,7 @@ const Connect = ({
             Connect Wallet
           </button>
         ) : (
-          <div id="userAddress">Connected: {shortAddress(account)}</div>
+          <div id="userAddress" style={{color:'#7914d6'}}>Connected: {shortAddress(account)}</div>
         )}
       </div>
       <div id="connectMessage">

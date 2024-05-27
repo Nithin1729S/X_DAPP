@@ -48,13 +48,13 @@ body {
 }
 
 h1 {
-  color: #1da1f2;
+  color: #fdb97c;
   text-align: center;
   margin-bottom: 20px;
 }
 
 #connectWalletBtn {
-  background-color: #1da1f2;
+  background-color: #eb57ad;
   color: #fff;
   border: none;
   padding: 10px 20px;

@@ -1,5 +1,6 @@
 .tweet-actions {
-    /* padding-left: 345px; */
+    position:absolute;
+    margin-left: 500px;
 }
 
 .tweet-actions button img {
@@ -40,3 +41,7 @@
     resize: vertical; /* Allow vertical resizing */
   }
   
+.content{
+  word-wrap: break-word;
+  max-width:400px;
+}
