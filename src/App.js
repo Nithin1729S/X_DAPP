@@ -5,7 +5,7 @@ import Tweets from "./components/Tweets";
 import AddTweet from "./components/AddTweet";
 import Connect from "./components/Connect";
 import ProfileCreation from "./components/ProfileCreation";
-import logo from "./images/logo.png"
+import logo from "./images/logo.png";
 
 export default function App() {
   const [account, setAccount] = useState(null);
@@ -96,8 +96,6 @@ export default function App() {
   return (
     <div className="container">
       <img id="logo" src={logo} alt="Logo" />
-      {/* <h1>X DAPP</h1> */}
-
       <Connect
         web3={web3}
         setWeb3={setWeb3}

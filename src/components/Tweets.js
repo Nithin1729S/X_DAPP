@@ -9,15 +9,20 @@ const Tweets = ({ tweets, shortAddress, account, deleteTweet, editTweet }) => {
   const [editMode, setEditMode] = useState(null);
   const [newContent, setNewContent] = useState("");
 
-  const handleEdit = (tweetId, content) => {
-    setEditMode(tweetId);
-    setNewContent(content);
+  const handleEdit = (tweetId, content, author) => {
+    if (author === account) {
+      setEditMode(tweetId);
+      setNewContent(content);
+    }
   };
 
-  const handleSaveEdit = (tweetId) => {
-    editTweet(tweetId, newContent);
-    setEditMode(null);
-    setNewContent("");
+  const handleSaveEdit = (tweetId, author) => {
+    if (author === account) {
+      editTweet(tweetId, newContent);
+      setEditMode(null);
+      setNewContent("");
+    }
+
   };
 
   const renderEditButtons = (tweet) => {
@@ -26,7 +31,7 @@ const Tweets = ({ tweets, shortAddress, account, deleteTweet, editTweet }) => {
     } else {
       return (
         <div className="tweet-actions">
-          <button onClick={() => handleEdit(tweet.id, tweet.content)}>
+          <button onClick={() => handleEdit(tweet.id, tweet.content, tweet.author)}>
             <img src={editLogo} alt="Edit" />
           </button>
           <button onClick={() => deleteTweet(tweet.id)}>
@@ -39,33 +44,48 @@ const Tweets = ({ tweets, shortAddress, account, deleteTweet, editTweet }) => {
 
   return (
     <div id="tweetsContainer">
-      {tweets.map((tweet, index) => (
-        <div key={index} className="tweet">
+      {tweets.map((tweet) => (
+        <div key={tweet.id} className="tweet">
           <img
             className="user-icon"
             src={`https://api.multiavatar.com/${tweet.author}.svg`}
             alt="User Icon"
           />
           <div className="tweet-inner">
+
+
+
             <div className="author">{tweet.displayName}</div>
-            {editMode === tweet.id ? (
+
+
+            {(editMode === tweet.id && tweet.author == account) ? (
+
+
+
               <div className="editArea">
                 <textarea
                   value={newContent}
                   onChange={(e) => setNewContent(e.target.value)}
                 />
-                <button onClick={() => handleSaveEdit(tweet.id)}>
-                <img src={saveLogo} alt="Save" />
+                <button onClick={() => handleSaveEdit(tweet.id, tweet.author)}>
+                  <img src={saveLogo} alt="Save" />
                 </button>
                 <button onClick={() => setEditMode(null)}>
-                <img src={cancelLogo} alt="Cancel" />
+                  <img src={cancelLogo} alt="Cancel" />
                 </button>
               </div>
-            ) : (
-              <div className="content">{tweet.content}</div>
-            )}
+            )
+
+
+              : (
+
+
+
+                <div className="content">{tweet.content}</div>
+              )}
           </div>
           {account === tweet.author && renderEditButtons(tweet)}
+          {console.log(tweet)}
         </div>
       ))}
     </div>
