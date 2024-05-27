@@ -1,9 +1,12 @@
 import { useState } from "react";
+import moment from 'moment';
+moment().utcOffset(330).format()
 import "../stylesheet/style.css";
 import deleteLogo from '../images/delete.png';
 import editLogo from '../images/edit.png';
 import saveLogo from '../images/save.png';
 import cancelLogo from '../images/cancel.png';
+import '../stylesheet/tweets.css'
 
 const Tweets = ({ tweets, shortAddress, account, deleteTweet, editTweet }) => {
   const [editMode, setEditMode] = useState(null);
@@ -80,8 +83,10 @@ const Tweets = ({ tweets, shortAddress, account, deleteTweet, editTweet }) => {
               : (
 
 
-
-                <div className="content">{tweet.content}</div>
+                <>
+                  <div className="content">{tweet.content}</div>
+                  <div className="date">{new moment(Number(tweet.timestamp) * 1000).toLocaleString().split(' GMT')[0]}</div>
+                </>
               )}
           </div>
           {account === tweet.author && renderEditButtons(tweet)}
