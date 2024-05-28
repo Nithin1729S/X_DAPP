@@ -66,6 +66,7 @@ export default function App() {
     try {
       await contract.methods.deleteTweet(id).send({ from: account });
       getTweets();
+      window.location.reload();
     } catch (error) {
       console.error("Failed to delete tweet:", error);
     }
@@ -80,6 +81,7 @@ export default function App() {
     try {
       await contract.methods.editTweet(id, newContent).send({ from: account });
       getTweets();
+      window.location.reload();
     } catch (error) {
       console.error("Failed to edit tweet:", error);
     }

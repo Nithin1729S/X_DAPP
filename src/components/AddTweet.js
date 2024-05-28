@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import '../stylesheet/addTweet.css'
 
 const AddTweet = ({ contract, account, getTweets }) => {
   const [newTweet, setNewTweet] = useState("");
@@ -13,12 +14,14 @@ const AddTweet = ({ contract, account, getTweets }) => {
     }
     try {
       setLoading(true);
-      await contract.methods.createTweet(tweet).send({ from: account });
+      const tx=await contract.methods.createTweet(tweet).send({ from: account });
+      // await tx.wait();
       getTweets();
     } catch (error) {
       console.error("User rejected request:", error);
     } finally {
       setLoading(false);
+      window.location.reload();
     }
   }
 
@@ -36,9 +39,10 @@ const AddTweet = ({ contract, account, getTweets }) => {
         placeholder="What's happening?"
         value={newTweet}
         onChange={(e) => setNewTweet(e.target.value)}
+        required
       />
       <br />
-      <button id="tweetSubmitBtn" style={{ marginLeft:'260px', background:'#eb57ad'}} disabled={loading} type="submit">
+      <button id="tweetSubmitBtn" style={{ marginLeft:'220px', background:'#eb57ad'}} disabled={loading} type="submit">
   {loading ? <div className="spinner"></div> : <>Tweet</>}
 </button>
 
