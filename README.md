@@ -4,10 +4,10 @@ X Dapp - A Decentralized X ( formerly twitter )  Application compiled in Remix I
 
 ## Live Demo
 
-Visit the live version of the Web3 Vault dApp [here](https://x-nine-gold.vercel.app).
+Visit the live version of the X dApp [here](https://x-nine-gold.vercel.app).
 
 ## Demo of the Project
-Experience the functionality of our Web3 Vault dApp by watching the demo
+Experience the functionality of dApp by watching the demo
 
 
 
