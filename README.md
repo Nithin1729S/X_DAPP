@@ -83,7 +83,7 @@ To get started with the X dApp, please follow the steps below:
     - Open the application in your web browser.
     - Use the Metamask extension to connect your wallet.
 
-6. **Create Your Account and Add Passwords:**
+6. **Create Your Account and start Tweeting:**
     - Once connected, your account will be created automatically.
     - You can now start tweeting.
 
